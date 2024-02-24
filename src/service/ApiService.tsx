@@ -8,7 +8,7 @@ class ApiService {
         this.apiUrl = 'http://localhost:1337';
     }
 
-    async fetchGet(path: any, urlParamsObject: any) {
+    async fetchGet(path: never, urlParamsObject: never) {
         try {
             const queryString = qs.stringify(urlParamsObject);
             const requestUrl = `${this.apiUrl}/api${path}${queryString ? `?${queryString}` : ""}`;
