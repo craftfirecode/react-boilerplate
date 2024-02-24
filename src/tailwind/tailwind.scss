@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  // default
+  body {
+    @apply bg-white;
+  }
+
+  h1 {
+    @apply text-5xl;
+  }
+
+  h2 {
+    @apply text-4xl;
+  }
+
+  h3 {
+    @apply text-3xl;
+  }
+
+  h4 {
+    @apply text-2xl;
+  }
+
+  h5 {
+    @apply text-xl;
+  }
+
+  h6 {
+    @apply text-lg;
+  }
+
+  // Add Theme
+  @import 'theme/indigo/@base/body'; // <html lang="en" data-mode="indigo">
+  @import 'theme/red/@base/body'; // <html lang="en" data-mode="red">
+}
+
+@layer components {
+  // default
+  .btn-primary {
+    @apply px-[18px] py-[8px] inline-flex text-white bg-gradient-to-r from-purple-500 via-pink-400 bg-orange-300 rounded-[5px];
+  }
+}
