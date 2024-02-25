@@ -20,10 +20,10 @@ app.use(session({
     secret: '3ihdoiwehdfiowehfih23f82', // Replace with a long, random string
     name: 'session', // Optional session name
     resave: false, // Don't resave unmodified sessions
-    saveUninitialized: true, // Create sessions even if empty
+    saveUninitialized: false, // Create sessions even if empty
     cookie: {
-        sameSite:'lax',
-        secure: false, // Set to true for HTTPS in production
+        sameSite: 'Lax',
+          secure: false, // Set to true for HTTPS in production
         httpOnly: true, // Prevent client-side JavaScript access to cookies
         maxAge: 1000 * 60 * 60 * 24, // Session expiration (1 day)
     },
@@ -61,6 +61,7 @@ app.post('/auth', function(request, response) {
 // http://localhost:3000/home
 app.get('/checkSession', function(request, response) {
     // If the user is loggedin
+    console.log(request.session)
     if (request.session.loggedin) {
         // Output username
         response.send('Welcome back, ' + request.session.username + '!');

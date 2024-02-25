@@ -27,7 +27,12 @@ function App() {
 
     const checkSession = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/checkSession');
+            const response = await axios.get('http://127.0.0.1:3000/checkSession', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, authorization'
+                },
+                withCredentials: true});
             console.log(response.data);
         } catch (error) {
             console.error(error);
