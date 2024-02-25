@@ -14,12 +14,14 @@ const app = express();
 app.use(cors());
 
 app.use(session({
-    secret: 'secret',
-    name: 'session',
-    resave: false,
-    saveUninitialized: true,
+    secret: 'secret', // Replace with a long, random string
+    name: 'session', // Optional session name
+    resave: false, // Don't resave unmodified sessions
+    saveUninitialized: true, // Create sessions even if empty
     cookie: {
-        secure: false
+        secure: false, // Set to true for HTTPS in production
+        httpOnly: false, // Prevent client-side JavaScript access to cookies
+        maxAge: 1000 * 60 * 60 * 24, // Session expiration (1 day)
     },
 }));
 app.use(express.json());
