@@ -4,10 +4,10 @@ import session from "express-session";
 import cors from "cors";
 
 const connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'root',
-    database : 'coin'
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'coin'
 });
 
 const app = express();
@@ -23,16 +23,16 @@ app.use(session({
     saveUninitialized: false, // Create sessions even if empty
     cookie: {
         sameSite: 'Lax',
-          secure: false, // Set to true for HTTPS in production
+        secure: false, // Set to true for HTTPS in production
         httpOnly: true, // Prevent client-side JavaScript access to cookies
-        maxAge: 1000 * 60 * 60 * 24, // Session expiration (1 day)
+        maxAge: 1000 * 60 * 60 * 240, // Session expiration (1 day)
     },
 }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
 // http://localhost:3000/auth
-app.post('/auth', function(request, response) {
+app.post('/auth', function (request, response) {
     // Capture the input fields
     console.log(request.body)
     let username = request.body.username;
@@ -40,7 +40,7 @@ app.post('/auth', function(request, response) {
     // Ensure the input fields exists and are not empty
     if (username && password) {
         // Execute SQL query that'll select the account from the database based on the specified username and password
-        connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+        connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
             // If there is an issue with the query, output the error
             if (error) throw error;
             // If the account exists
@@ -59,7 +59,7 @@ app.post('/auth', function(request, response) {
 });
 
 // http://localhost:3000/home
-app.get('/checkSession', function(request, response) {
+app.get('/checkSession', function (request, response) {
     // If the user is loggedin
     console.log(request.session)
     if (request.session.loggedin) {
