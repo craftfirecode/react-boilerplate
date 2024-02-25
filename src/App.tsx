@@ -9,13 +9,15 @@ function App() {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/auth', {
+            const response = await axios.post('http://127.0.0.1:3000/auth', {
                 username,
                 password,
             }, {
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, authorization'
+                },
+                withCredentials: true
             });
             console.log(response);
         } catch (error) {

@@ -11,16 +11,20 @@ const connection = mysql.createConnection({
 });
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}))
 
 app.use(session({
-    secret: 'secret', // Replace with a long, random string
+    secret: '3ihdoiwehdfiowehfih23f82', // Replace with a long, random string
     name: 'session', // Optional session name
     resave: false, // Don't resave unmodified sessions
     saveUninitialized: true, // Create sessions even if empty
     cookie: {
+        sameSite:'lax',
         secure: false, // Set to true for HTTPS in production
-        httpOnly: false, // Prevent client-side JavaScript access to cookies
+        httpOnly: true, // Prevent client-side JavaScript access to cookies
         maxAge: 1000 * 60 * 60 * 24, // Session expiration (1 day)
     },
 }));
@@ -41,7 +45,6 @@ app.post('/auth', function(request, response) {
             if (error) throw error;
             // If the account exists
             if (results.length > 0) {
-                console.log('Login')
                 request.session.loggedin = true;
                 request.session.username = username;
             } else {
