@@ -1,9 +1,14 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 const Login = () => {
+    const location = useLocation();
 
+    useEffect(() => {
+        // execute on location change
+        console.log('Location changed!', location.pathname);
+    }, [location]);
     // const apiData = await ApiService.fetchGet('/setting', urlParamsObject);
     const [username, setUsername] = useState('admin');
     const [password, setPassword] = useState('admin');
@@ -27,27 +32,11 @@ const Login = () => {
         }
     };
 
-    const checkSession = async () => {
-        try {
-            const response = await axios.get('/api/checkSession', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, authorization'
-                },
-                withCredentials: true
-            });
-            console.log(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     return (
         <>
             <div>
                 <Link to={'/dashboard'}>APP</Link>
             </div>
-            <button onClick={checkSession}>checkSession</button>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
