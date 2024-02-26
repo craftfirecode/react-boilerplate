@@ -3,6 +3,7 @@ import Login from "./pages/Login.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import axios from "axios";
 import {useEffect, useState} from "react";
+import TemplateMain from "./Template/TemplateMain.tsx";
 
 function App() {
     const [login, setLogin] = useState(false)
@@ -35,20 +36,21 @@ function App() {
 
     return (
         <>
-        {login ? 'true' : 'false'}
+            {login ? 'true' : 'false'}
             <BrowserRouter>
                 <Routes>
-                    {login ? (
-                        <>
-                            <Route index path="/" element={<Login/>}/>
-                            <Route path="/dashboard" element={<Dashboard/>}/>
-                        </>
-                    ) : (
-                        <>
-                            <Route index path="/" element={<Login/>}/>
-                        </>
-                    )}
-
+                    <Route path="/" element={<TemplateMain/>}>
+                        {login ? (
+                            <>
+                                <Route index path="/" element={<Login/>}/>
+                                <Route path="/dashboard" element={<Dashboard/>}/>
+                            </>
+                        ) : (
+                            <>
+                                <Route index path="/" element={<Login/>}/>
+                            </>
+                        )}
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </>
