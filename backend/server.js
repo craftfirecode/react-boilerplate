@@ -68,7 +68,7 @@ app.get('/checkSession', function (request, response) {
         response.send('Welcome back, ' + request.session.username + '!');
     } else {
         // Not logged in
-        response.send('Not Login');
+        response.send(405);
     }
     response.end();
 });

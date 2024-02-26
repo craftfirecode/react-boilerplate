@@ -2,9 +2,10 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./pages/Login.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import axios from "axios";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 function App() {
+    const [login, setLogin] = useState(false)
     const checkSession = async () => {
         try {
             const response = await axios.get('/api/checkSession', {
@@ -14,7 +15,14 @@ function App() {
                 },
                 withCredentials: true
             });
-            console.log(response.data);
+
+            if (response) {
+                setLogin(true);
+                console.log('true')
+            } else {
+                setLogin(false);
+            }
+
         } catch (error) {
             console.error(error);
         }
@@ -26,13 +34,26 @@ function App() {
     }, []);
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route index path="/" element={<Login/>}/>
-                <Route path="/dashboard" element={<Dashboard/>}/>
-            </Routes>
-        </BrowserRouter>
-    );
+        <>
+            {login ? 'true' : 'false'}
+            <BrowserRouter>
+                <Routes>
+                    {login ? (
+                        <>
+                            <Route index path="/" element={<Login/>}/>
+                            <Route path="/dashboard" element={<Dashboard/>}/>
+                        </>
+                    ) : (
+                        <>
+                            <Route index path="/" element={<Login/>}/>
+                        </>
+                    )}
+
+                </Routes>
+            </BrowserRouter>
+        </>
+    )
+
 }
 
 export default App;

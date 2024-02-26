@@ -26,6 +26,7 @@ const Login = () => {
                 },
                 withCredentials: true
             });
+            document.location.reload();
             console.log(response);
         } catch (error) {
             console.error(error);
