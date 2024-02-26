@@ -1,15 +1,6 @@
-import {Link, useLocation} from "react-router-dom";
-import {useEffect} from "react";
+import {Link} from "react-router-dom";
 
 const Dashboard = () => {
-
-    const location = useLocation();
-
-    useEffect(() => {
-        // execute on location change
-        console.log('Location changed!', location.pathname);
-    }, [location]);
-
     return (
         <>
             <div>
