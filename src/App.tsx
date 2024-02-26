@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard.tsx";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import TemplateMain from "./Template/TemplateMain.tsx";
+import Konto from "./pages/Konto.tsx";
 
 function App() {
     const [login, setLogin] = useState(false)
@@ -36,14 +37,13 @@ function App() {
 
     return (
         <>
-            {login ? 'true' : 'false'}
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<TemplateMain/>}>
                         {login ? (
                             <>
-                                <Route index path="/" element={<Login/>}/>
-                                <Route path="/dashboard" element={<Dashboard/>}/>
+                                <Route path="/" element={<Dashboard/>}/>
+                                <Route path="/konto" element={<Konto/>}/>
                             </>
                         ) : (
                             <>
