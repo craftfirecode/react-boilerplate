@@ -2,12 +2,16 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./pages/Login.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 import TemplateMain from "./Template/TemplateMain.tsx";
 import Konto from "./pages/Konto.tsx";
 
 function App() {
     const [login, setLogin] = useState(false)
+    const [user, setUser] = useState("Jesse Hall");
+
+    const UserContext = createContext<any>(false)
+
     const checkSession = async () => {
         try {
             const response = await axios.get('/api/checkSession', {
@@ -20,6 +24,7 @@ function App() {
 
             if (response) {
                 setLogin(true);
+                setUser(response.data);
                 console.log('true')
             } else {
                 setLogin(false);
@@ -37,6 +42,8 @@ function App() {
 
     return (
         <>
+            <UserContext.Provider value={user}>
+            </UserContext.Provider>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<TemplateMain/>}>

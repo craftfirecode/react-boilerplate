@@ -23,9 +23,9 @@ const Nav = () => {
                             <defs>
                                 <linearGradient id="paint0_linear_17_14" x1="7.00056e-09" y1="13.6889" x2="28.0015"
                                                 y2="13.7658" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#A869FE"/>
-                                    <stop offset="0.5142" stop-color="#FF6DAF"/>
-                                    <stop offset="1" stop-color="#FFA762"/>
+                                    <stop stopColor="#A869FE"/>
+                                    <stop offset="0.5142" stopColor="#FF6DAF"/>
+                                    <stop offset="1" stopColor="#FFA762"/>
                                 </linearGradient>
                             </defs>
                         </svg>
