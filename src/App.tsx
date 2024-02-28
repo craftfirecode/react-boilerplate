@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./pages/Login.tsx";
-import Dashboard from "./pages/Dashboard.tsx";
+import Home from "./pages/Home.tsx";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import TemplateMain from "./Template/TemplateMain.tsx";
@@ -45,7 +45,7 @@ function App() {
                         <Route path="/" element={<TemplateMain/>}>
                             {login ? (
                                 <>
-                                    <Route path="/" element={<Dashboard/>}/>
+                                    <Route path="/" element={<Home/>}/>
                                     <Route path="/konto" element={<Konto/>}/>
                                 </>
                             ) : (

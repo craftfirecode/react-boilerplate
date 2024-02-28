@@ -10,6 +10,7 @@ const Konto = () => {
             Konto
         </>
     )
+
 }
 
 export default Konto;

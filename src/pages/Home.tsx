@@ -1,6 +1,6 @@
 import {useContent} from "../context/ContentContext.tsx";
 
-const Dashboard = () => {
+const Home = () => {
     const content: any = useContent();
 
     return (
@@ -13,4 +13,4 @@ const Dashboard = () => {
 
 }
 
-export default Dashboard;
+export default Home;
