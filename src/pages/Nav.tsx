@@ -32,10 +32,10 @@ const Nav = () => {
                     </a>
                     <ul className="hidden md:flex space-x-4">
                         <li>
-                            <Link onClick={handleMenuToggle} to={'/'}>Home</Link>
+                            <Link to={'/'}>Home</Link>
                         </li>
                         <li>
-                            <Link onClick={handleMenuToggle} to={'/konto'}>Konto</Link>
+                            <Link to={'/konto'}>Konto</Link>
                         </li>
                     </ul>
                     <button className="md:hidden focus:outline-none" id="menu-button" onClick={handleMenuToggle}>
