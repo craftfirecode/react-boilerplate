@@ -1,9 +1,10 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
+import {useSession} from "../context/useSession.tsx";
 
 const Nav = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-
+    const loggedIn = useSession();
     const handleMenuToggle = () => {
         setMenuOpen(!menuOpen);
     };
@@ -31,12 +32,22 @@ const Nav = () => {
                         </svg>
                     </a>
                     <ul className="hidden md:flex space-x-4">
-                        <li>
-                            <Link to={'/'}>Home</Link>
-                        </li>
-                        <li>
-                            <Link to={'/konto'}>Konto</Link>
-                        </li>
+                        {loggedIn ? (
+                            <>
+                                <li>
+                                    <Link to={'/'}>Home</Link>
+                                </li>
+                                <li>
+                                    <Link to={'/konto'}>Konto</Link>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li>
+                                    <Link to={'/'}>Home</Link>
+                                </li>
+                            </>
+                        )}
                     </ul>
                     <button className="md:hidden focus:outline-none" id="menu-button" onClick={handleMenuToggle}>
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
