@@ -2,15 +2,13 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./pages/Login.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import axios from "axios";
-import {createContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import TemplateMain from "./Template/TemplateMain.tsx";
 import Konto from "./pages/Konto.tsx";
+import {ContentProvider} from "./context/ContentContext.tsx";
 
 function App() {
     const [login, setLogin] = useState(false)
-    const [user, setUser] = useState("Jesse Hall");
-
-    const UserContext = createContext<any>(false)
 
     const checkSession = async () => {
         try {
@@ -24,7 +22,6 @@ function App() {
 
             if (response) {
                 setLogin(true);
-                setUser(response.data);
                 console.log('true')
             } else {
                 setLogin(false);
@@ -42,24 +39,25 @@ function App() {
 
     return (
         <>
-            <UserContext.Provider value={user}>
-            </UserContext.Provider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<TemplateMain/>}>
-                        {login ? (
-                            <>
-                                <Route path="/" element={<Dashboard/>}/>
-                                <Route path="/konto" element={<Konto/>}/>
-                            </>
-                        ) : (
-                            <>
-                                <Route index path="/" element={<Login/>}/>
-                            </>
-                        )}
-                    </Route>
-                </Routes>
-            </BrowserRouter>
+            <ContentProvider>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<TemplateMain/>}>
+                            {login ? (
+                                <>
+                                    <Route path="/" element={<Dashboard/>}/>
+                                    <Route path="/konto" element={<Konto/>}/>
+                                </>
+                            ) : (
+                                <>
+                                    <Route index path="/" element={<Login/>}/>
+                                </>
+                            )}
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </ContentProvider>
+
         </>
     )
 
