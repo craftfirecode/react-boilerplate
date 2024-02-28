@@ -6,7 +6,7 @@ import Konto from "./pages/Konto.tsx";
 import {ContentProvider} from "./context/ContentContext.tsx";
 import {useSession} from "./context/useSession.tsx";
 import TemplateMain from "./Template/TemplateMain.tsx";
-import NotFound from "./pages/404.tsx";
+import NotFound from "./pages/NotFound.tsx";
 
 function App() {
     const loggedIn = useSession();

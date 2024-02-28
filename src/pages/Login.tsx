@@ -10,8 +10,8 @@ const Login = () => {
         console.log('Location changed!', location.pathname);
     }, [location]);
     // const apiData = await ApiService.fetchGet('/setting', urlParamsObject);
-    const [username, setUsername] = useState('admin');
-    const [password, setPassword] = useState('admin');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();

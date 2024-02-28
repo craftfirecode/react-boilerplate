@@ -1,16 +1,16 @@
 import {Outlet} from "react-router-dom";
-import Footer from "../pages/Footer.tsx";
-import Nav from "../pages/Nav.tsx";
+import Footer from "../component/Footer.tsx";
+import Nav from "../component/Nav.tsx";
 
 const Layout = () => {
     return (
-        <>
-            <Nav/>
-            <main>
-                <Outlet/>
+        <div className="flex flex-col min-h-screen">
+            <Nav />
+            <main className="flex-1 container mx-auto my-5">
+                <Outlet />
             </main>
-            <Footer/>
-        </>
+            <Footer />
+        </div>
     )
 };
 
