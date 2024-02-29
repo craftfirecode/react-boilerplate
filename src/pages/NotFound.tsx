@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 
 function NotFound() {
     return (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center w-screen">
             <div className="max-w-md p-8 bg-white shadow-lg rounded-md">
                 <h2 className="text-3xl font-semibold text-gray-800 mb-4">404 - Seite nicht gefunden</h2>
                 <p className="text-gray-600">Die von Ihnen angeforderte Seite existiert nicht.</p>

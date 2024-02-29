@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 const Login = () => {
     const location = useLocation();
@@ -34,17 +34,14 @@ const Login = () => {
     };
 
     return (
-        <>
-            <div>
-                <Link to={'/dashboard'}>APP</Link>
-            </div>
+        <div className='w-screen'>
             <div className='container'>
-                <div className='row'>
-                    <div className='col-12'>
-                        <h1 className='mb-3'>Anmelden</h1>
+                <div className='row md:justify-center'>
+                    <div className='col-12 md:col-8'>
+                        <h1 className='mb-3 text-center font-light uppercase'>Anmelden</h1>
                         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                             <div className='row'>
-                                <div className='col-12 mt-3 md:col-6'>
+                                <div className='col-12 md:col-6 mt-3'>
                                     <input
                                         type="text"
                                         placeholder="username"
@@ -73,7 +70,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
