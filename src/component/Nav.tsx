@@ -10,7 +10,7 @@ const Nav = () => {
     };
 
     return (
-        <nav className="bg-indigo-100">
+        <nav className="shadow-lg border-100 py-3">
             <div className="container mx-auto">
                 <div className="flex justify-between items-center">
                     <a href="#">
@@ -58,7 +58,7 @@ const Nav = () => {
                     </button>
                 </div>
             </div>
-            <div id="menu" className={menuOpen ? "block" : "hidden"}>
+            <div className={menuOpen ? "block p-3 md:hidden" : "hidden"}>
                 <ul>
                     <li>
                         <Link onClick={handleMenuToggle} to={'/'}>Home</Link>
