@@ -2,6 +2,7 @@ import mysql from "mysql";
 import express from "express";
 import session from "express-session";
 import cors from "cors";
+import bcrypt from "bcrypt"; // Importieren Sie bcrypt für Hashing
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -33,25 +34,30 @@ app.use(express.urlencoded({extended: true}));
 
 // http://localhost:3000/auth
 app.post('/auth', function (request, response) {
-    // Capture the input fields
     console.log(request.body)
     let username = request.body.username;
     let password = request.body.password;
     // Ensure the input fields exists and are not empty
     if (username && password) {
-        // Execute SQL query that'll select the account from the database based on the specified username and password
-        connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
-            // If there is an issue with the query, output the error
+        connection.query('SELECT * FROM accounts WHERE username = ?', [username], function (error, results, fields) {
             if (error) throw error;
-            // If the account exists
             if (results.length > 0) {
-                request.session.loggedin = true;
-                request.session.username = username;
-                request.session.row = results;
+                const user = results[0];
+                bcrypt.compare(password, user.password, function(err, result) {
+                    if(result) {
+                        request.session.loggedin = true;
+                        request.session.username = username;
+                        request.session.row = results;
+                        response.send('Login successful!');
+                    } else {
+                        response.send('Incorrect Username and/or Password!');
+                    }
+                    response.end();
+                });
             } else {
-                response.send('Incorrect Username and/or Password!');
+                response.send('User does not exist!');
+                response.end();
             }
-            response.end();
         });
     } else {
         response.send('Please enter Username and Password!');
@@ -61,14 +67,29 @@ app.post('/auth', function (request, response) {
 
 // http://localhost:3000/home
 app.get('/checkSession', function (request, response) {
-    // If the user is loggedin
-    console.log(request.session)
+    // function hashPassword(password, callback) {
+    //     const saltRounds = 10; // Anzahl der Salz-Runden für die Verschlüsselung
+    //     bcrypt.hash(password, saltRounds, function(err, hash) {
+    //         if (err) {
+    //             callback(err, null);
+    //         } else {
+    //             callback(null, hash);
+    //         }
+    //     });
+    // }
+    //
+    // const plainPassword = "VFT5intro45!";
+    // hashPassword(plainPassword, function(err, hashedPassword) {
+    //     if (err) {
+    //         console.error('Fehler beim Hashen des Passworts:', err);
+    //     } else {
+    //         console.log('Hashwert des Passworts:', hashedPassword);
+    //     }
+    // });
     if (request.session.loggedin) {
-        // Output username
         response.send('Welcome back, ' + request.session.username + '!');
     } else {
-        // Not logged in
-        response.send(405);
+        response.status(401).send('Unauthorized');
     }
     response.end();
 });
