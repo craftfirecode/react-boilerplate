@@ -1,7 +1,7 @@
 import {useSession} from "../context/useSession.tsx";
 
 const Konto = () => {
-    const user = useSession();
+    const user: any = useSession();
 
     return (
         <div className='container mx-auto'>
