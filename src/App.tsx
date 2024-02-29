@@ -16,7 +16,7 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<TemplateMain/>}>
-                            {loggedIn ? (
+                            {loggedIn.loggedIn ? (
                                 <>
                                     <Route path="/" element={<Home/>}/>
                                     <Route path="/konto" element={<Konto/>}/>

@@ -48,6 +48,7 @@ app.post('/auth', function (request, response) {
                         request.session.loggedin = true;
                         request.session.username = username;
                         request.session.row = results;
+                        request.session.row[0].password = null;
                         response.send('Login successful!');
                     } else {
                         response.send('Incorrect Username and/or Password!');
@@ -87,7 +88,7 @@ app.get('/checkSession', function (request, response) {
     //     }
     // });
     if (request.session.loggedin) {
-        response.send('Welcome back, ' + request.session.username + '!');
+        response.send(request.session);
     } else {
         response.status(401).send('Unauthorized');
     }

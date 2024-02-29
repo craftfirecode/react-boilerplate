@@ -36,7 +36,7 @@ const Nav = () => {
                                 </svg>
                             </Link>
                             <ul className="hidden md:flex space-x-4">
-                                {loggedIn ? (
+                                {loggedIn.loggedIn ? (
                                     <>
                                         <li>
                                             <Link to={'/'}>Home</Link>
@@ -48,7 +48,7 @@ const Nav = () => {
                                 ) : (
                                     <>
                                         <li>
-                                            <Link to={'/'}>Home</Link>
+                                            <Link to={'/'}>Login</Link>
                                         </li>
                                     </>
                                 )}
@@ -67,12 +67,22 @@ const Nav = () => {
             </div>
             <div className={menuOpen ? "block p-3 md:hidden" : "hidden"}>
                 <ul>
-                    <li>
-                        <Link onClick={handleMenuToggle} to={'/'}>Home</Link>
-                    </li>
-                    <li>
-                        <Link onClick={handleMenuToggle} to={'/konto'}>Konto</Link>
-                    </li>
+                    {loggedIn.loggedIn ? (
+                        <>
+                            <li>
+                                <Link to={'/'}>Home</Link>
+                            </li>
+                            <li>
+                                <Link to={'/konto'}>Konto</Link>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li>
+                                <Link to={'/'}>Login</Link>
+                            </li>
+                        </>
+                    )}
                 </ul>
             </div>
         </nav>

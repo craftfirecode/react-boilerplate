@@ -1,20 +1,18 @@
-import {useContent} from "../context/ContentContext.tsx";
+import {useSession} from "../context/useSession.tsx";
 
 const Konto = () => {
-    const content: any = useContent();
+    const user = useSession();
 
     return (
         <div className='container mx-auto'>
             <div className='row'>
                 <div className='col'>
-                    <h1>{content.title}</h1>
-                    <p>{content.description}</p>
+                    <h6>{user.user.data?.row[0].email}</h6>
+                    <h6>{user.user.data?.row[0].username}</h6>
                 </div>
             </div>
-            Konto
         </div>
     )
-
 }
 
 export default Konto;

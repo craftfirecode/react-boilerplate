@@ -4,6 +4,7 @@ import axios from "axios";
 
 export function useSession() {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [user, serUser] = useState({});
 
     useEffect(() => {
         const checkSession = async () => {
@@ -17,6 +18,7 @@ export function useSession() {
                 });
 
                 if (response) {
+                    serUser(response)
                     setLoggedIn(true);
                 } else {
                     setLoggedIn(false);
@@ -30,5 +32,5 @@ export function useSession() {
         checkSession().then();
     }, []);
 
-    return loggedIn;
+    return {loggedIn, user};
 }
