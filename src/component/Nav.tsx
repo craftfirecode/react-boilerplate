@@ -36,7 +36,7 @@ const Nav = () => {
                                 </svg>
                             </Link>
                             <ul className="hidden md:flex space-x-4">
-                                {loggedIn.loggedIn ? (
+                                {loggedIn ? (
                                     <>
                                         <li>
                                             <Link to={'/'}>Home</Link>
@@ -67,7 +67,7 @@ const Nav = () => {
             </div>
             <div className={menuOpen ? "block p-3 md:hidden" : "hidden"}>
                 <ul>
-                    {loggedIn.loggedIn ? (
+                    {loggedIn ? (
                         <>
                             <li>
                                 <Link to={'/'}>Home</Link>

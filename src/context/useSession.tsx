@@ -1,36 +1,25 @@
 // useSession.js
 import {useEffect, useState} from "react";
-import axios from "axios";
+import {createClient} from '@supabase/supabase-js'
+
+const supabase = createClient('https://jfgrqcvupvyzyquawwpg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmZ3JxY3Z1cHZ5enlxdWF3d3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkyODIwMjEsImV4cCI6MjAyNDg1ODAyMX0.D-O2nSRD3N4WWQOLc-aU3lOWof5tqTx3XriGTEpihDQ')
 
 export function useSession() {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [user, serUser] = useState({});
-
+    const [session, setSession] = useState<any>(null)
+    console.log(session);
     useEffect(() => {
-        const checkSession = async () => {
-            try {
-                const response = await axios.get('/api/checkSession', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, authorization'
-                    },
-                    withCredentials: true
-                });
+        supabase.auth.getSession().then(({data: {session}}) => {
+            setSession(session)
+        })
 
-                if (response) {
-                    serUser(response)
-                    setLoggedIn(true);
-                } else {
-                    setLoggedIn(false);
+        const {
+            data: {subscription},
+        } = supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
 
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        };
+        return () => subscription.unsubscribe();
+    }, [])
 
-        checkSession().then();
-    }, []);
-
-    return {loggedIn, user};
+    return session
 }

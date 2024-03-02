@@ -1,98 +1,51 @@
-import mysql from "mysql";
-import express from "express";
-import session from "express-session";
-import cors from "cors";
-import bcrypt from "bcrypt"; // Importieren Sie bcrypt für Hashing
+import {createClient} from "@supabase/supabase-js";
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'coin'
-});
+import express from "express";
 
 const app = express();
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
-}))
+const PORT = process.env.PORT || 3000;
 
-app.use(session({
-    secret: '3ihdoiwehdfiowehfih23f82', // Replace with a long, random string
-    name: 'session', // Optional session name
-    resave: false, // Don't resave unmodified sessions
-    saveUninitialized: false, // Create sessions even if empty
-    cookie: {
-        sameSite: 'Lax',
-        secure: false, // Set to true for HTTPS in production
-        httpOnly: true, // Prevent client-side JavaScript access to cookies
-        maxAge: 1000 * 60 * 60 * 240, // Session expiration (1 day)
-    },
-}));
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+// Initialize Supabase client
+const supabaseUrl = 'https://jfgrqcvupvyzyquawwpg.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmZ3JxY3Z1cHZ5enlxdWF3d3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkyODIwMjEsImV4cCI6MjAyNDg1ODAyMX0.D-O2nSRD3N4WWQOLc-aU3lOWof5tqTx3XriGTEpihDQ';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-// http://localhost:3000/auth
-app.post('/auth', function (request, response) {
-    console.log(request.body)
-    let username = request.body.username;
-    let password = request.body.password;
-    // Ensure the input fields exists and are not empty
-    if (username && password) {
-        connection.query('SELECT * FROM accounts WHERE username = ?', [username], function (error, results, fields) {
-            if (error) throw error;
-            if (results.length > 0) {
-                const user = results[0];
-                bcrypt.compare(password, user.password, function(err, result) {
-                    if(result) {
-                        request.session.loggedin = true;
-                        request.session.username = username;
-                        request.session.row = results;
-                        request.session.row[0].password = null;
-                        response.send('Login successful!');
-                    } else {
-                        response.send('Incorrect Username and/or Password!');
-                    }
-                    response.end();
-                });
-            } else {
-                response.send('User does not exist!');
-                response.end();
-            }
-        });
+// Middleware to check session and extract user ID
+app.use(async (req, res, next) => {
+    //const jwt = req.headers.authorization; // Assuming JWT is sent in Authorization header
+    const jwt = "eyJhbGciOiJIUzI1NiIsImtpZCI6IkVTWUh6bE9XQk5sNWh4MFQiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzA5MzkyNDM2LCJpYXQiOjE3MDkzODg4MzYsImlzcyI6Imh0dHBzOi8vamZncnFjdnVwdnl6eXF1YXd3cGcuc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6ImZkODg1NDM3LTEyNWItNGQyMy1hNGVlLWY4ZTE0YmFmZmYzOSIsImVtYWlsIjoia2FsbGUwMDQ1QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzA5MzA0NDAwfV0sInNlc3Npb25faWQiOiJhM2EzN2Y5OS0xNDgxLTQ3NGItOTIyNi1kYmJjYjEzYzU2Y2EifQ.74bX7n91oBTBveTqVEVH2HWXB_0z1uvTOLI1tRARuQ0"; // Assuming JWT is sent in Authorization header
+
+    try {
+        // Get user data from Superbase using the JWT
+        const { data: user, error } = await supabase.auth.getUser(jwt);
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        if (user) {
+            // Attach user data to the request object
+            req.user = user;
+        } else {
+            req.user = null;
+        }
+    } catch (error) {
+        console.error('Error getting user data:', error);
+        req.user = null;
+    }
+
+    next();
+});
+
+// Endpoint to access user data
+app.get('/user', (req, res) => {
+    if (req.user) {
+        res.json(req.user);
     } else {
-        response.send('Please enter Username and Password!');
-        response.end();
+        res.status(401).json({ message: 'Unauthorized' });
     }
 });
 
-// http://localhost:3000/home
-app.get('/checkSession', function (request, response) {
-    // function hashPassword(password, callback) {
-    //     const saltRounds = 10; // Anzahl der Salz-Runden für die Verschlüsselung
-    //     bcrypt.hash(password, saltRounds, function(err, hash) {
-    //         if (err) {
-    //             callback(err, null);
-    //         } else {
-    //             callback(null, hash);
-    //         }
-    //     });
-    // }
-    //
-    // const plainPassword = "VFT5intro45!";
-    // hashPassword(plainPassword, function(err, hashedPassword) {
-    //     if (err) {
-    //         console.error('Fehler beim Hashen des Passworts:', err);
-    //     } else {
-    //         console.log('Hashwert des Passworts:', hashedPassword);
-    //     }
-    // });
-    if (request.session.loggedin) {
-        response.send(request.session);
-    } else {
-        response.status(401).send('Unauthorized');
-    }
-    response.end();
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
-
-app.listen(3000);
