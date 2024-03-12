@@ -1,41 +1,61 @@
-import React, {useState, useEffect} from 'react';
-import {openDB} from 'idb';
+import React, { useEffect, useState } from 'react';
+import { openDB } from 'idb';
 
 const ModeComponent: React.FC = () => {
-    const [mode, setMode] = useState<string>('indigo');
+    const [db, setDb] = useState<any>(null);
 
     useEffect(() => {
         // IndexedDB initialisieren
         const initDB = async () => {
-            const db = await openDB('PageBuilder', 1, {
-                upgrade(db) {
-                    db.createObjectStore('settings');
-                },
-            });
-            const value = await db.get('settings', 'styleMode');
-            if (value) {
-                setMode(value);
-                document.documentElement.setAttribute('data-mode', value);
+            try {
+                const db = await openDB('PageBuilder', 1, {
+                    upgrade(db) {
+                        db.createObjectStore('settings');
+                    },
+                });
+                setDb(db); // Speichern der DB-Verbindung
+                const value = await db.get('settings', 'styleMode');
+                if (value) {
+                    document.documentElement.setAttribute('data-mode', value);
+                }
+            } catch (error) {
+                console.error("Fehler beim Initialisieren der IndexedDB:", error);
             }
         };
-        initDB().then();
+        initDB();
     }, []);
 
-    const handleChangeMode = async () => {
-        const newMode = mode === 'indigo' ? 'red' : 'indigo';
-        setMode(newMode);
-        // Wert in IndexedDB speichern
-        const db = await openDB('PageBuilder', 1);
-        await db.put('settings', newMode, 'styleMode');
-        // Ändern der data-mode-Eigenschaft des <html>-Elements
-        document.documentElement.setAttribute('data-mode', newMode);
+    const handleChangeMode = async (style: string) => {
+        if (!db) {
+            console.error("Datenbankverbindung nicht initialisiert.");
+            return;
+        }
+        try {
+            // Wert in IndexedDB speichern
+            await db.put('settings', style, 'styleMode');
+            // Ändern der data-mode-Eigenschaft des <html>-Elements
+            document.documentElement.setAttribute('data-mode', style);
+        } catch (error) {
+            console.error("Fehler beim Speichern des neuen Modus:", error);
+        }
     };
 
     return (
         <div className='container my-3'>
-            <button className='btn-primary' onClick={handleChangeMode}>
-                Change Mode to {mode === 'indigo' ? 'redMode' : 'indigoMode'}
-            </button>
+            <div className="row gap-4">
+                <button className='btn-primary w-full flex justify-center' onClick={() => handleChangeMode("white")}>
+                    White
+                </button>
+                <button className='btn-primary w-full flex justify-center' onClick={() => handleChangeMode("indigo")}>
+                    Light Indigo
+                </button>
+                <button className='btn-primary w-full flex justify-center' onClick={() => handleChangeMode("red")}>
+                    Light Red
+                </button>
+                <button className='btn-primary w-full flex justify-center' onClick={() => handleChangeMode("dark")}>
+                    Dark
+                </button>
+            </div>
         </div>
     );
 };
