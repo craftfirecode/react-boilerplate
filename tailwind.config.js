@@ -9,7 +9,12 @@ export default {
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                primary: "hsl(var(--primary))",
+                secondary: "hsl(var(--secondary))",
+            },
+        },
     },
     plugins: [BS5grid, BS5spacing],
 }

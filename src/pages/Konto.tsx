@@ -1,4 +1,3 @@
-import ModeComponent from "../core/ModeComponent.tsx";
 
 const Konto = () => {
     return (
@@ -6,7 +5,6 @@ const Konto = () => {
             <div className='row'>
                 <div className='col'>
                     Konto
-                    <ModeComponent />
                 </div>
             </div>
         </div>

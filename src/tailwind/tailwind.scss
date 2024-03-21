@@ -4,6 +4,10 @@
 
 @layer base {
   // default
+  :root {
+    --primary: 276.64 78.44% 67.25%;
+    --secondary: 23.29 100% 70.2%;
+  }
   body {
     @apply bg-white;
   }
@@ -31,10 +35,6 @@
   h6 {
     @apply text-lg;
   }
-
-  // Add Theme
-  @import 'theme/indigo/@base/body'; // <html lang="en" data-mode="indigo">
-  @import 'theme/red/@base/body'; // <html lang="en" data-mode="red">
 }
 
 @layer components {
