@@ -15,7 +15,7 @@ const Nav = () => {
                 <div className='row'>
                     <div className='col-12'>
                         <div className="flex justify-between items-center">
-                            <Link to={'/'}>
+                            <Link onClick={() => setMenuOpen(false)} to={'/'}>
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -70,16 +70,16 @@ const Nav = () => {
                     {loggedIn ? (
                         <>
                             <li>
-                                <Link to={'/'}>Home</Link>
+                                <Link onClick={handleMenuToggle} to={'/'}>Home</Link>
                             </li>
                             <li>
-                                <Link to={'/konto'}>Konto</Link>
+                                <Link onClick={handleMenuToggle} to={'/konto'}>Konto</Link>
                             </li>
                         </>
                     ) : (
                         <>
                             <li>
-                                <Link to={'/'}>Login</Link>
+                                <Link onClick={handleMenuToggle} to={'/'}>Login</Link>
                             </li>
                         </>
                     )}
