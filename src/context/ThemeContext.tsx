@@ -14,6 +14,8 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
     useEffect(() => {
         localStorage.setItem("theme", theme);
+        const html = document.documentElement;
+        html.setAttribute('data-mode', theme);
     }, [theme]);
 
     const toggleTheme = () => {
