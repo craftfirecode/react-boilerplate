@@ -8,6 +8,12 @@
     --primary: 276.64 78.44% 67.25%;
     --secondary: 23.29 100% 70.2%;
   }
+
+  [data-mode="cyber"] {
+    --primary: 111.64 78.44% 67.25%;
+    --secondary: 222.29 100% 70.2%;
+  }
+
   body {
     @apply bg-white;
   }
