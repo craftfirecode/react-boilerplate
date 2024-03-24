@@ -11,16 +11,22 @@ const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     const [theme, setTheme] = useState<string>(
         localStorage.getItem("theme") || "cyber"
     );
+    const [isReady, setIsReady] = useState(false); // Neuer Zustand, um den Ladezustand zu verwalten
 
     useEffect(() => {
         localStorage.setItem("theme", theme);
         const html = document.documentElement;
         html.setAttribute('data-mode', theme);
+        setIsReady(true); // Setze isReady auf true, nachdem das Attribut gesetzt wurde
     }, [theme]);
 
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === "cyber" ? "light" : "cyber"));
     };
+
+    if (!isReady) {
+        return <div>Loading...</div>; // Zeige einen Ladebildschirm oder nichts, während isReady false ist
+    }
 
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
