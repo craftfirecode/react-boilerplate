@@ -15,6 +15,8 @@ const buttonVariants = cva(
                     "bg-secondary text-white shadow hover:bg-secondary/75 hover:text-black",
                 outline:
                     "border border-input shadow hover:text-black/50",
+                danger: // New variant
+                    "bg-red-500 text-white shadow hover:bg-red-700 hover:text-black"
             },
             size: {
                 default: "h-9 px-4 py-2",
