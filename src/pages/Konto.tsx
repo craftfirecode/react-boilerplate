@@ -1,5 +1,6 @@
 import {Button} from "../component/Button.tsx";
 import {useTheme} from "../context/ThemeContext.tsx";
+import CtaButton from "../component/CtaButton.tsx";
 
 const Konto = () => {
     const {theme, toggleTheme} = useTheme();
@@ -14,6 +15,9 @@ const Konto = () => {
                     <div className="bg-red-200 p-[6px] rounded-md shadow">
                         Currently Theme is {theme}
                     </div>
+                </div>
+                <div>
+                    <CtaButton></CtaButton>
                 </div>
             </div>
         </div>
