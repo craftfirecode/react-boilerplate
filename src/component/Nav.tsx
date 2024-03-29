@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import {useSession} from "../context/useSession.tsx";
+import PopOver from "./PopOver.tsx";
 
 const Nav = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -43,6 +44,9 @@ const Nav = () => {
                                         </li>
                                         <li>
                                             <Link to={'/konto'}>Konto</Link>
+                                        </li>
+                                        <li>
+                                            <PopOver />
                                         </li>
                                     </>
                                 ) : (
