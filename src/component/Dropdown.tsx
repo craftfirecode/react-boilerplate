@@ -36,8 +36,10 @@ const MenuContext = React.createContext<{
 }>({
     getItemProps: () => ({}),
     activeIndex: null,
-    setActiveIndex: () => {},
-    setHasFocusInside: () => {},
+    setActiveIndex: () => {
+    },
+    setHasFocusInside: () => {
+    },
     isOpen: false
 });
 
@@ -50,7 +52,7 @@ interface MenuProps {
 export const MenuComponent = React.forwardRef<
     HTMLButtonElement,
     MenuProps & React.HTMLProps<HTMLButtonElement>
->(({ children, label, ...props }, forwardedRef) => {
+>(({children, label, ...props}, forwardedRef) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [hasFocusInside, setHasFocusInside] = React.useState(false);
     const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
@@ -66,13 +68,13 @@ export const MenuComponent = React.forwardRef<
 
     const isNested = parentId != null;
 
-    const { floatingStyles, refs, context } = useFloating<HTMLButtonElement>({
+    const {floatingStyles, refs, context} = useFloating<HTMLButtonElement>({
         nodeId,
         open: isOpen,
         onOpenChange: setIsOpen,
         placement: isNested ? "right-start" : "bottom-start",
         middleware: [
-            offset({ mainAxis: isNested ? 0 : 4, alignmentAxis: isNested ? -4 : 0 }),
+            offset({mainAxis: isNested ? 0 : 4, alignmentAxis: isNested ? -4 : 0}),
             flip(),
             shift()
         ],
@@ -81,16 +83,16 @@ export const MenuComponent = React.forwardRef<
 
     const hover = useHover(context, {
         // enabled: isNested,
-        delay: { open: 75 },
-        handleClose: safePolygon({ blockPointerEvents: true })
+        delay: {open: 75},
+        handleClose: safePolygon({blockPointerEvents: true})
     });
     const click = useClick(context, {
         event: "mousedown",
         toggle: !isNested,
         ignoreMouse: isNested
     });
-    const role = useRole(context, { role: "menu" });
-    const dismiss = useDismiss(context, { bubbles: true });
+    const role = useRole(context, {role: "menu"});
+    const dismiss = useDismiss(context, {bubbles: true});
     const listNavigation = useListNavigation(context, {
         listRef: elementsRef,
         activeIndex,
@@ -136,7 +138,7 @@ export const MenuComponent = React.forwardRef<
 
     React.useEffect(() => {
         if (isOpen && tree) {
-            tree.events.emit("menuopen", { parentId, nodeId });
+            tree.events.emit("menuopen", {parentId, nodeId});
         }
     }, [tree, isOpen, nodeId, parentId]);
 
@@ -165,8 +167,12 @@ export const MenuComponent = React.forwardRef<
             >
                 {label}
                 {isNested && (
-                    <span aria-hidden style={{ marginLeft: 10, fontSize: 10 }}>
-            ▶
+                    <span aria-hidden style={{marginLeft: 10, fontSize: 10}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                         className="bi bi-chevron-right" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd"
+                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                        </svg>
           </span>
                 )}
             </button>
@@ -213,9 +219,9 @@ interface MenuItemProps {
 export const MenuItem = React.forwardRef<
     HTMLButtonElement,
     MenuItemProps & React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ label, disabled, ...props }, forwardedRef) => {
+>(({label, disabled, ...props}, forwardedRef) => {
     const menu = React.useContext(MenuContext);
-    const item = useListItem({ label: disabled ? null : label });
+    const item = useListItem({label: disabled ? null : label});
     const tree = useFloatingTree();
     const isActive = item.index === menu.activeIndex;
 
@@ -253,10 +259,10 @@ export const Menu = React.forwardRef<
     if (parentId === null) {
         return (
             <FloatingTree>
-                <MenuComponent {...props} ref={ref} />
+                <MenuComponent {...props} ref={ref}/>
             </FloatingTree>
         );
     }
 
-    return <MenuComponent {...props} ref={ref} />;
+    return <MenuComponent {...props} ref={ref}/>;
 });
