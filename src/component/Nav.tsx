@@ -36,7 +36,7 @@ const Nav = () => {
                                     </defs>
                                 </svg>
                             </Link>
-                            <ul className="hidden md:flex space-x-4">
+                            <ul className="hidden md:flex items-center space-x-4">
                                 {loggedIn ? (
                                     <>
                                         <li>
