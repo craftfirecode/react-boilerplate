@@ -2,6 +2,7 @@ import {Outlet} from "react-router-dom";
 import Footer from "../component/Footer.tsx";
 import Nav from "../component/Nav.tsx";
 import PopOver from "../component/PopOver.tsx";
+import DropdownHero from "../component/DropdownHero.tsx";
 
 const Layout = () => {
     return (
@@ -9,7 +10,20 @@ const Layout = () => {
             <Nav/>
             <div className="flex">
                 <PopOver />
-                <PopOver />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
+                <DropdownHero />
             </div>
             <main className="flex-1 flex my-5">
                 <Outlet/>
