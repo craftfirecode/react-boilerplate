@@ -1,6 +1,8 @@
 import {
+    FloatingFocusManager,
+    FloatingPortal,
     autoUpdate,
-    flip, FloatingFocusManager, FloatingPortal,
+    flip,
     offset,
     safePolygon,
     shift, useDismiss,
@@ -36,11 +38,9 @@ const       DropdownHero = () => {
 
     });
 
-
     const {getReferenceProps, getFloatingProps} = useInteractions([
         hover, focus, dismiss
     ]);
-
 
     return (
         <>
@@ -75,13 +75,12 @@ const       DropdownHero = () => {
                                 </div>
                                 <div className="pe-0 col-6">
                                     <ul>
-                                        <li><a className="...">Demo</a></li>
+                                        <li><button className="...">Demo</button></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </FloatingFocusManager>
-
                 </FloatingPortal>
 
             )}

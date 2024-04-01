@@ -92,7 +92,10 @@ export const MenuComponent = React.forwardRef<
         ignoreMouse: isNested
     });
     const role = useRole(context, {role: "menu"});
-    const dismiss = useDismiss(context, {bubbles: true});
+    const dismiss = useDismiss(context, {
+        capture: true,
+        bubbles: true
+    });
     const listNavigation = useListNavigation(context, {
         listRef: elementsRef,
         activeIndex,
