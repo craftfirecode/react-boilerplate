@@ -10,6 +10,8 @@ import {
     safePolygon,
     shift,
     useClick,
+    FloatingArrow,
+    arrow,
     useDismiss,
     useFloating,
     useFloatingNodeId,
@@ -24,6 +26,7 @@ import {
     useTypeahead
 } from "@floating-ui/react";
 import * as React from "react";
+import {useRef} from "react";
 
 const MenuContext = React.createContext<{
     getItemProps: (
@@ -61,6 +64,8 @@ export const MenuComponent = React.forwardRef<
     const labelsRef = React.useRef<Array<string | null>>([]);
     const parent = React.useContext(MenuContext);
 
+    const arrowRef = useRef(null);
+
     const tree = useFloatingTree();
     const nodeId = useFloatingNodeId();
     const parentId = useFloatingParentNodeId();
@@ -74,9 +79,12 @@ export const MenuComponent = React.forwardRef<
         onOpenChange: setIsOpen,
         placement: isNested ? "right-start" : "bottom-start",
         middleware: [
-            offset({mainAxis: isNested ? 0 : 4, alignmentAxis: isNested ? -4 : 0}),
+            offset({mainAxis: isNested ? 5 : 15, alignmentAxis: isNested ? -4 : 0}),
             flip(),
-            shift()
+            shift(),
+            arrow({
+                element: arrowRef,
+            }),
         ],
         whileElementsMounted: autoUpdate
     });
@@ -201,6 +209,7 @@ export const MenuComponent = React.forwardRef<
                                     style={floatingStyles}
                                     {...getFloatingProps()}
                                 >
+                                    {!isNested && <FloatingArrow ref={arrowRef} context={context} />}
                                     {children}
                                 </div>
                             </FloatingFocusManager>
