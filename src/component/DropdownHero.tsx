@@ -13,9 +13,7 @@ import {
 } from "@floating-ui/react";
 import {useState} from "react";
 
-const       DropdownHero = () => {
-
-
+const DropdownHero = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const {refs, floatingStyles, context} = useFloating({
@@ -30,7 +28,9 @@ const       DropdownHero = () => {
     });
 
     const dismiss = useDismiss(context, {bubbles: true});
+
     const focus = useFocus(context);
+
     const hover = useHover(context, {
         enabled: true,
         delay: {open: 75},
@@ -44,7 +44,8 @@ const       DropdownHero = () => {
 
     return (
         <>
-            <button className="focus:shadow-violet-700 " ref={refs.setReference} {...getReferenceProps()}>Button</button>
+            <button className="focus:shadow-violet-700 " ref={refs.setReference} {...getReferenceProps()}>Button
+            </button>
             {isOpen && (
                 <FloatingPortal>
                     <FloatingFocusManager context={context} modal={false}>
@@ -60,7 +61,8 @@ const       DropdownHero = () => {
                                         href="/"
                                     >
                                         <svg aria-hidden width="38" height="38" viewBox="0 0 25 25" fill="white">
-                                            <path d="M12 25C7.58173 25 4 21.4183 4 17C4 12.5817 7.58173 9 12 9V25Z"></path>
+                                            <path
+                                                d="M12 25C7.58173 25 4 21.4183 4 17C4 12.5817 7.58173 9 12 9V25Z"></path>
                                             <path d="M12 0H4V8H12V0Z"></path>
                                             <path
                                                 d="M17 8C19.2091 8 21 6.20914 21 4C21 1.79086 19.2091 0 17 0C14.7909 0 13 1.79086 13 4C13 6.20914 14.7909 8 17 8Z"></path>
@@ -75,7 +77,9 @@ const       DropdownHero = () => {
                                 </div>
                                 <div className="pe-0 col-6">
                                     <ul>
-                                        <li><button className="...">Demo</button></li>
+                                        <li>
+                                            <button className="...">Demo</button>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
