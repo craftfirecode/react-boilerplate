@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import {useSession} from "../context/useSession.tsx";
-import PopOver from "./PopOver.tsx";
+import {Menu, MenuItem} from "./Dropdown.tsx";
 
 const Nav = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -40,7 +40,26 @@ const Nav = () => {
                                 {loggedIn ? (
                                     <>
                                         <li>
-                                            <PopOver />
+                                            <Menu label="Edit">
+                                                <MenuItem label="Undooooooooooooo" onClick={() => console.log("Undo")} />
+                                                <MenuItem label="Redo" disabled />
+                                                <MenuItem label="Cut" />
+                                                <Menu label="Copy as">
+                                                    <MenuItem label="Text" />
+                                                    <MenuItem label="Video" />
+                                                    <Menu label="Image">
+                                                        <MenuItem label=".png" />
+                                                        <MenuItem label=".jpg" />
+                                                        <MenuItem label=".svg" />
+                                                        <MenuItem label=".gif" />
+                                                    </Menu>
+                                                    <MenuItem label="Audio" />
+                                                </Menu>
+                                                <Menu label="Share">
+                                                    <MenuItem label="Mail" />
+                                                    <MenuItem label="Instagram" />
+                                                </Menu>
+                                            </Menu>
                                         </li>
                                         <li>
                                             <Link to={'/'}>Home</Link>
@@ -49,7 +68,26 @@ const Nav = () => {
                                             <Link to={'/konto'}>Konto</Link>
                                         </li>
                                         <li>
-                                            <PopOver />
+                                            <Menu label="Edit">
+                                                <MenuItem label="Undooooooooooooo" onClick={() => console.log("Undo")} />
+                                                <MenuItem label="Redo" disabled />
+                                                <MenuItem label="Cut" />
+                                                <Menu label="Copy as">
+                                                    <MenuItem label="Text" />
+                                                    <MenuItem label="Video" />
+                                                    <Menu label="Image">
+                                                        <MenuItem label=".png" />
+                                                        <MenuItem label=".jpg" />
+                                                        <MenuItem label=".svg" />
+                                                        <MenuItem label=".gif" />
+                                                    </Menu>
+                                                    <MenuItem label="Audio" />
+                                                </Menu>
+                                                <Menu label="Share">
+                                                    <MenuItem label="Mail" />
+                                                    <MenuItem label="Instagram" />
+                                                </Menu>
+                                            </Menu>
                                         </li>
                                     </>
                                 ) : (
