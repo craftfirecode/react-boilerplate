@@ -4,6 +4,16 @@
 
 @layer base {
   // default
+  :root {
+    --primary: 276.64 78.44% 67.25%;
+    --secondary: 23.29 100% 70.2%;
+  }
+
+  [data-mode="cyber"] {
+    --primary: 111.64 78.44% 67.25%;
+    --secondary: 222.29 100% 70.2%;
+  }
+
   body {
     @apply bg-white;
   }
@@ -31,10 +41,6 @@
   h6 {
     @apply text-lg;
   }
-
-  // Add Theme
-  @import 'theme/indigo/@base/body'; // <html lang="en" data-mode="indigo">
-  @import 'theme/red/@base/body'; // <html lang="en" data-mode="red">
 }
 
 @layer components {
@@ -42,4 +48,74 @@
   .btn-primary {
     @apply px-[18px] py-[8px] inline-flex text-white bg-gradient-to-r from-purple-500 via-pink-400 bg-orange-300 rounded-[5px];
   }
+
+  .cta-button {
+    background-image: url('./../assets/button-primary-background.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    border: 20px solid transparent;
+    padding: 0 15px;
+    border-image: url('./../assets/button-primary-border.png') 30 stretch;
+    border-image-slice: 20; /* Passt an, wie das Bild zugeschnitten wird */
+  }
 }
+:root {
+  --highlighted: royalblue;
+  --active-unfocused: #d7dce5;
+}
+
+.RootMenu {
+  padding: 6px 14px;
+  border: none;
+  font-size: 16px;
+  background: none;
+  border-radius: 6px;
+  border: 1px solid var(--active-unfocused);
+}
+
+.RootMenu[data-open],
+.RootMenu:hover {
+  background: var(--active-unfocused);
+}
+
+.Menu {
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 4px;
+  border-radius: 6px;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  outline: 0;
+}
+
+.MenuItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: left;
+  line-height: 1.8;
+  min-width: 110px;
+  margin: 0;
+  outline: 0;
+}
+
+.MenuItem:focus {
+  background: var(--highlighted);
+  color: white;
+}
+
+.MenuItem[data-nested][data-open]:not([data-focus-inside]) {
+  background: var(--highlighted);
+  color: white;
+}
+
+.MenuItem[data-focus-inside][data-open] {
+  background: var(--active-unfocused);
+}
+

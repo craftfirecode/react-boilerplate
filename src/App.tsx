@@ -1,20 +1,25 @@
-// App.js
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Home from "./pages/Home.tsx";
-import Konto from "./pages/Konto.tsx";
-import {ContentProvider} from "./context/ContentContext.tsx";
-import TemplateMain from "./Template/TemplateMain.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import Home from "./pages/Home";
+import Konto from "./pages/Konto";
+import {ContentProvider} from "./context/ContentContext";
+import TemplateMain from "./Template/TemplateMain";
+import NotFound from "./pages/NotFound";
 import {Auth} from "@supabase/auth-ui-react";
 import {ThemeSupa} from "@supabase/auth-ui-shared";
-import {createClient} from '@supabase/supabase-js'
-import Login from "./pages/Login.tsx";
-import {useSession} from "./context/useSession.tsx";
+import {createClient} from '@supabase/supabase-js';
+import Login from "./pages/Login";
+import {useSession} from "./context/useSession";
 
 const supabase = createClient('https://jfgrqcvupvyzyquawwpg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmZ3JxY3Z1cHZ5enlxdWF3d3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkyODIwMjEsImV4cCI6MjAyNDg1ODAyMX0.D-O2nSRD3N4WWQOLc-aU3lOWof5tqTx3XriGTEpihDQ')
 
 function App() {
-    const loggedIn = useSession();
+    const { session, isLoading } = useSession(); // Destructure to get session and isLoading
+
+    // Optionally, you can render a loading indicator while isLoading is true
+    if (isLoading) {
+        return <></>; // Or any other loading indicator
+    }
+
     return (
         <>
             <ContentProvider>
@@ -22,10 +27,9 @@ function App() {
                     <Routes>
                         <Route path="/" element={<TemplateMain/>}>
                             {
-                                !loggedIn ? (
+                                !session ? ( // Check if there is no session to decide between Login and Home/Konto routes
                                         <>
-                                            <Route path="/" element={<Login><Auth supabaseClient={supabase}
-                                                                                  appearance={{theme: ThemeSupa}}/></Login>}/>
+                                            <Route path="/" element={<Login><Auth supabaseClient={supabase} appearance={{theme: ThemeSupa}}/></Login>}/>
                                             <Route path="*" element={<NotFound/>}/>
                                         </>
                                     )
