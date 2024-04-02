@@ -104,9 +104,12 @@ const Nav = () => {
                                                         </div>
                                                     </div>
                                                     <div className="col-12">
-                                                        <MenuItem label="Undooooooooooooo"
-                                                                  onClick={() => console.log("Undo")}/>
-                                                        <MenuItem label="Cut"/>
+                                                        <Link to={"/konto"}>
+                                                            <MenuItem label="Konto"/>
+                                                        </Link>
+                                                        <Link to={"/"}>
+                                                            <MenuItem label="Home"/>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </Menu>
