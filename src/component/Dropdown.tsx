@@ -55,7 +55,7 @@ interface MenuProps {
 export const MenuComponent = React.forwardRef<
     HTMLButtonElement,
     MenuProps & React.HTMLProps<HTMLButtonElement>
->(({children, label, ...props}, forwardedRef) => {
+>(({children, label, className, ...props}, forwardedRef) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [hasFocusInside, setHasFocusInside] = React.useState(false);
     const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
@@ -164,7 +164,7 @@ export const MenuComponent = React.forwardRef<
                 data-open={isOpen ? "" : undefined}
                 data-nested={isNested ? "" : undefined}
                 data-focus-inside={hasFocusInside ? "" : undefined}
-                className={isNested ? "MenuItem" : "RootMenu"}
+                className={isNested ? "MenuItem" : (className + " RootMenu")}
                 {...getReferenceProps(
                     parent.getItemProps({
                         ...props,

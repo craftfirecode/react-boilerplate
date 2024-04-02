@@ -40,7 +40,7 @@ const Nav = () => {
                                 {loggedIn ? (
                                     <>
                                         <li>
-                                            <Menu label="Edit">
+                                            <Menu className="bg-indigo-300 p-2" label="Edit">
                                                 <MenuItem label="Undooooooooooooo" onClick={() => console.log("Undo")}/>
                                                 <MenuItem label="Redo" disabled/>
                                                 <MenuItem label="Cut"/>
