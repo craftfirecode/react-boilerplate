@@ -40,7 +40,7 @@ const Nav = () => {
                                 {loggedIn ? (
                                     <>
                                         <li>
-                                            <Menu className="bg-indigo-300 p-2 data-[open]:bg-[#d7dce5]" label="Edit">
+                                            <Menu className="bg-indigo-300 p-2 data-[open]:bg-[#d7dce5]" label="Test">
                                                 <MenuItem label="Undooooooooooooo" onClick={() => console.log("Undo")}/>
                                                 <MenuItem label="Redo" disabled/>
                                                 <MenuItem label="Cut"/>
@@ -68,7 +68,7 @@ const Nav = () => {
                                             <Link to={'/konto'}>Konto</Link>
                                         </li>
                                         <li>
-                                            <Menu label="Edit">
+                                            <Menu label="Settings">
                                                 <div className="min-w-[550px]">
                                                     <div
                                                         className="text-mauve12 text-[15px] leading-[19px] font-medium mb-2.5">Dimensions
