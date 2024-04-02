@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import {useSession} from "../context/useSession.tsx";
-import {Menu, MenuItem} from "./Dropdown.tsx";
+import {Menu, MenuItem} from "./dropdown/Dropdown.tsx";
 
 const Nav = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -40,7 +40,7 @@ const Nav = () => {
                                 {loggedIn ? (
                                     <>
                                         <li>
-                                            <Menu className="bg-indigo-300 p-2" label="Edit">
+                                            <Menu className="bg-indigo-300 p-2 data-[open]:bg-[#d7dce5]" label="Edit">
                                                 <MenuItem label="Undooooooooooooo" onClick={() => console.log("Undo")}/>
                                                 <MenuItem label="Redo" disabled/>
                                                 <MenuItem label="Cut"/>
@@ -75,8 +75,7 @@ const Nav = () => {
                                                     </div>
                                                     <div className="row m-0">
                                                         <div className="p-0 col-6">
-                                                            <MenuItem className="focus:shadow-violet-700 from-purple-900 to-indigo-900 flex
-                    h-full w-full select-none flex-col justify-end rounded-[6px] bg-gradient-to-b p-[25px] no-underline outline-none focus:shadow-[0_0_0_2px]">
+                                                            <MenuItem className="focus:shadow-violet-700 bg-indigo-300 focus:shadow-[0_0_0_2px]">
                                                                 <svg aria-hidden width="38" height="38"
                                                                      viewBox="0 0 25 25" fill="white">
                                                                     <path

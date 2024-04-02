@@ -27,6 +27,7 @@ import {
 } from "@floating-ui/react";
 import * as React from "react";
 import {useRef} from "react";
+import "./dropdown.css";
 
 const MenuContext = React.createContext<{
     getItemProps: (
@@ -205,7 +206,7 @@ export const MenuComponent = React.forwardRef<
                             >
                                 <div
                                     ref={refs.setFloating}
-                                    className="Menu"
+                                    className="bg-white bg-opacity-80 backdrop-blur-md p-1 rounded-lg shadow-md border outline-none"
                                     style={floatingStyles}
                                     {...getFloatingProps()}
                                 >
