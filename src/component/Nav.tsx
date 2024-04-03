@@ -69,18 +69,22 @@ const Nav = () => {
                                         </li>
                                         <li>
                                             <Menu className="p-2" label={
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="currentColor" className="bi bi-person-circle"
+                                                     viewBox="0 0 16 16">
                                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                                    <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                                    <path fillRule="evenodd"
+                                                          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                                                 </svg>
                                             }>
-                                                <div className="min-w-[550px]">
+                                                <div className="max-w-[450px] min-w-[250px]">
                                                     <div
                                                         className="text-mauve12 text-[15px] leading-[19px] font-medium mb-2.5">Dimensions
                                                     </div>
                                                     <div className="row m-0">
                                                         <div className="p-0 col-6">
-                                                            <MenuItem className="focus:shadow-violet-700 bg-indigo-300 focus:shadow-[0_0_0_2px]">
+                                                            <MenuItem
+                                                                className="focus:shadow-violet-700 bg-indigo-300 focus:shadow-[0_0_0_2px]">
                                                                 <svg aria-hidden width="38" height="38"
                                                                      viewBox="0 0 25 25" fill="white">
                                                                     <path
@@ -99,9 +103,45 @@ const Nav = () => {
                                                             </MenuItem>
                                                         </div>
                                                         <div className="pe-0 col-6">
-                                                            <MenuItem label="Test"/>
-                                                            <MenuItem label="Cut"/>
+                                                            <MenuItem
+                                                                className="focus:shadow-violet-700 bg-indigo-300 focus:shadow-[0_0_0_2px]">
+                                                                    <svg aria-hidden width="38" height="38"
+                                                                         viewBox="0 0 25 25" fill="white">
+                                                                        <path
+                                                                            d="M12 25C7.58173 25 4 21.4183 4 17C4 12.5817 7.58173 9 12 9V25Z"></path>
+                                                                        <path d="M12 0H4V8H12V0Z"></path>
+                                                                        <path
+                                                                            d="M17 8C19.2091 8 21 6.20914 21 4C21 1.79086 19.2091 0 17 0C14.7909 0 13 1.79086 13 4C13 6.20914 14.7909 8 17 8Z"></path>
+                                                                    </svg>
+                                                                    <div
+                                                                        className="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">
+                                                                        Radix Primitives
+                                                                    </div>
+                                                                    <p className="text-mauve4 text-[14px] leading-[1.3]">
+                                                                        Unstyled, accessible components for React.
+                                                                    </p>
+                                                            </MenuItem>
                                                         </div>
+                                                    </div>
+                                                    <div className="col-12 mt-2">
+                                                        <MenuItem
+                                                            className="focus:shadow-violet-700 min-h-[200px] bg-indigo-300 focus:shadow-[0_0_0_2px]">
+                                                            <svg aria-hidden width="38" height="38"
+                                                                 viewBox="0 0 25 25" fill="white">
+                                                                <path
+                                                                    d="M12 25C7.58173 25 4 21.4183 4 17C4 12.5817 7.58173 9 12 9V25Z"></path>
+                                                                <path d="M12 0H4V8H12V0Z"></path>
+                                                                <path
+                                                                    d="M17 8C19.2091 8 21 6.20914 21 4C21 1.79086 19.2091 0 17 0C14.7909 0 13 1.79086 13 4C13 6.20914 14.7909 8 17 8Z"></path>
+                                                            </svg>
+                                                            <div
+                                                                className="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">
+                                                                Radix Primitives
+                                                            </div>
+                                                            <p className="text-mauve4 text-[14px] leading-[1.3]">
+                                                                Unstyled, accessible components for React.
+                                                            </p>
+                                                        </MenuItem>
                                                     </div>
                                                     <div className="col-12">
                                                         <Link to={"/konto"}>
