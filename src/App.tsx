@@ -64,7 +64,7 @@ const App = () => {
                                     :
                                     (
                                         <>
-                                            {data.map((item: any, index: any) => (
+                                            {data && data.map((item: any, index: any) => (
                                                 <Route key={index} path={item.link}
                                                        element={<Page pageID={item.page.data.id}/>}/>
                                             ))}

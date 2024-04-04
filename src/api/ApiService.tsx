@@ -5,7 +5,7 @@ class ApiService {
     apiUrl: string;
 
     constructor() {
-        this.apiUrl = 'http://localhost:1337';
+        this.apiUrl = 'https://headless.mapztour.de/';
     }
 
     async fetchGet(path: any, urlParamsObject: any) {
@@ -14,7 +14,7 @@ class ApiService {
             const requestUrl = `${this.apiUrl}/api${path}${queryString ? `?${queryString}` : ""}`;
 
             const headers = {
-                Authorization: 'Bearer ' + 'e6e60e40786b183ed463b3e5ab541db15f1e3da314f0d9b52e2abc27491ed01a8a3d353f24745e085b7a1ab77b1e3c2a2accc281f708e9195860939793763a68380a99b08aa0c26bc85119b2875e20aaae52d6437815f25b86c0397b533c46a166b561ab8ff267d62893aea7d23d38071c7af0cea82f4b118435b99527ceaf89', // Passe dies entsprechend an
+                Authorization: 'Bearer ' + '1ccae18636a4041f71b524f6c0663372ec0fb092ade356991a2c0d533d482a72f811049572540a81ec52dc9bf0b5e5ab39c10e6d31d059f08f0d773ed5b27712a0c83081043bef33a82e07d5dc9eec21b829383d49080b71abaa96643eaa2de0894d896af7807972c846fba1928fd6ff0e0f623847025229c907c6665b58315f', // Passe dies entsprechend an
             };
 
             const response = await axios.get(requestUrl, { headers });
