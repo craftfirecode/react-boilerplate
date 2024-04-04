@@ -65,8 +65,12 @@ const App = () => {
                                     (
                                         <>
                                             {data && data.map((item: any, index: any) => (
-                                                <Route key={index} path={item.link}
-                                                       element={<Page pageID={item.page.data.id}/>}/>
+                                                <>
+                                                    <Route key={index} path={item.link} element={<Page pageID={item.page.data.id}/>}/>
+                                                    {item.submenu && item.submenu.map((navItem: any, navIndex: any) => (
+                                                        <Route key={navIndex} path={navItem.link} element={<Page pageID={navItem.id}/>}/>
+                                                    ))}
+                                                </>
                                             ))}
                                             <Route path="/" element={<Home/>}/>
                                             <Route path="/konto" element={<Konto/>}/>

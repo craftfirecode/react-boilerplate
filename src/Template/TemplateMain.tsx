@@ -28,12 +28,22 @@ const Layout = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <Nav/>
-            {data && data.map((item: any) => (
-                <Link key={item.id}
-                      className="text-dark hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
-                      to={{pathname: item.link}}
-                      state={item}>{item.title}</Link>
+            {data && data.map((item: any, index: any) => (
+                <div key={index}>
+                    <Link key={item.id}
+                          className="text-dark hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                          to={{pathname: item.link}}
+                          state={item}>{item.title}</Link>
+                    {item.submenu && item.submenu.map((subItem: any) => (
+                        <Link key={subItem.id}
+                              className="text-dark hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                              to={{pathname: subItem.link}}
+                              state={item}>{subItem.title}</Link>
+                    ))}
+                </div>
             ))}
+
+
             <main className="flex-1 flex my-5">
                 <Outlet/>
             </main>
