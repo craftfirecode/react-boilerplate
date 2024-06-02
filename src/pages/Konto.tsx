@@ -9,7 +9,6 @@ const Konto = () => {
     const { data, error, loading } = useAxios('https://jsonplaceholder.typicode.com/posts');
     const { data: userData, error: userError, loading: userLoading } = useAxios("https://jsonplaceholder.typicode.com/posts");
     const { data: postsData, error: postsError, loading: postsLoading } = useAxios("https://jsonplaceholder.typicode.com/posts");
-;
 
     const handleChildClick = () => {
         console.log(`Klick erhalten von Konto`);
