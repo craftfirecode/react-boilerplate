@@ -6,7 +6,7 @@ interface ButtonProps {
   children?: React.ReactNode; // Kinder-Prop hinzugefügt
 }
 
-const ButtonTry: React.FC<ButtonProps> = ({ onClick, children }) => {
+const ButtonFX: React.FC<ButtonProps> = ({ onClick, children }) => {
   const defaultOnClick = () => {
     console.log('Default button clicked!');
   };
@@ -25,4 +25,4 @@ const ButtonTry: React.FC<ButtonProps> = ({ onClick, children }) => {
   );
 };
 
-export default ButtonTry;
+export default ButtonFX;
