@@ -65,6 +65,9 @@ const Nav = () => {
                                             <Link to={'/'}>Home</Link>
                                         </li>
                                         <li>
+                                            <Link to={'/map'}>Map</Link>
+                                        </li>
+                                        <li>
                                             <Link to={'/konto'}>Konto</Link>
                                         </li>
                                         <li>
