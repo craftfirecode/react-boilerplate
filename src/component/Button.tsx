@@ -16,7 +16,9 @@ const buttonVariants = cva(
                 outline:
                     "border border-input shadow hover:text-black/50",
                 danger: // New variant
-                    "bg-red-500 text-white shadow hover:bg-red-700 hover:text-black"
+                    "bg-red-500 text-white shadow hover:bg-red-700 hover:text-black",
+                wow: 
+                    "cta-button text-[#e2d29f] hover:text-[white] tracking-[6px] text-[17px] spacing font-semibold"    
             },
             size: {
                 default: "h-9 px-4 py-2",
