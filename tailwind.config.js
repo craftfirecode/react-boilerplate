@@ -1,7 +1,3 @@
-import BS5grid from "./src/tailwind/plugin/BS5grid.js";
-import BS5spacing from "./src/tailwind/plugin/BS5spacing.js";
-
-/** @type {import('tailwindcss').Config} */
 export default {
     darkMode: ['selector', '[data-mode="dark"]'],
     content: [
@@ -14,7 +10,17 @@ export default {
                 primary: "hsl(var(--primary))",
                 secondary: "hsl(var(--secondary))",
             },
+            container: {
+                center: true,
+                padding: '2rem',
+                screens: {
+                  sm: '640px',
+                  md: '768px',
+                  lg: '1024px',
+                  xl: '1180px',
+                  '2xl': '1280px',
+                },
+              },
         },
     },
-    plugins: [BS5grid, BS5spacing],
 }
