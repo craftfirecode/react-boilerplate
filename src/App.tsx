@@ -8,7 +8,6 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClient } from "@supabase/supabase-js";
 import Login from "./pages/Login";
 import { useSession } from "./context/useSession";
-import "./main.css";
 
 const supabase = createClient(
   import.meta.env.VITE_SUPER_URL,

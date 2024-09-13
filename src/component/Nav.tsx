@@ -4,7 +4,7 @@ import { useSession } from "../context/useSession.tsx";
 
 const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const loggedIn = useSession();
+  const { session } = useSession()
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
   };
@@ -48,7 +48,7 @@ const Nav = () => {
                 </svg>
               </Link>
               <ul className="hidden md:flex items-center space-x-4">
-                {loggedIn ? (
+                {session ? (
                   <>
                     <li>
                       <Link to={"/"}>Home</Link>
@@ -91,7 +91,7 @@ const Nav = () => {
       </div>
       <div className={menuOpen ? "block p-3 md:hidden" : "hidden"}>
         <ul>
-          {loggedIn ? (
+          {session ? (
             <>
               <li>
                 <Link onClick={handleMenuToggle} to={"/"}>
