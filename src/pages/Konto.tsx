@@ -62,13 +62,13 @@ const Konto = () => {
         } else {
           console.log("Profil erstellt:", insertData);
           setProfileData(insertData); // Füge das neue Profil in den State ein
-          setFormData({ username: data.username });
+          setFormData({ username: data?.username });
         }
       } else if (data) {
         // Wenn die Zeile mit der user_id gefunden wurde, speichere sie im State
         console.log("Profil gefunden:", data);
         setProfileData(data);
-        setFormData({ username: data.username });
+        setFormData({ username: data?.username });
       } else if (error) {
         console.error("Fehler beim Abrufen des Profils:", error);
       }
