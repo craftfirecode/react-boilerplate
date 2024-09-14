@@ -3,7 +3,6 @@ import { supabase } from "../supabaseClient";
 import { useSession } from "../context/useSession";
 
 const Home = () => {
-  const { session } = useSession(); 
   const [data, setData] = useState<any[]>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -19,24 +18,6 @@ const Home = () => {
     fetchData();
   }, []); // Add empty dependency array to run the effect only once
 
-
-  useEffect(() => {
-    const createUserProfile = async () => {
-      if (session) {
-        const { error } = await supabase.rpc("create_user_profile", {
-          user_id: session?.user.id,
-        });
-
-        if (error) {
-          console.error("Error creating user profile:", error);
-        } else {
-          console.log("User profile created successfully");
-        }
-      }
-    };
-
-    createUserProfile();
-  }, [session]); 
 
   return (
     <div>
