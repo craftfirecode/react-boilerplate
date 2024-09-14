@@ -24,7 +24,7 @@ export function useSession() {
 
         // Listen for auth state changes
         const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session);
+            setSession(session); // Set the session state on auth state change
             setIsLoading(false); // Stop loading on auth state change
         });
 
