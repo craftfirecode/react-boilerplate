@@ -5,14 +5,9 @@ import TemplateMain from "./Template/TemplateMain";
 import NotFound from "./pages/NotFound";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { createClient } from "@supabase/supabase-js";
 import Login from "./pages/Login";
 import { useSession } from "./context/useSession";
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPER_URL,
-  import.meta.env.VITE_SUPER_API
-);
+import { supabase } from "./supabaseClient";
 
 const App = () => {
   const { session, isLoading } = useSession(); // Destructure to get session and isLoading
