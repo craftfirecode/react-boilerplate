@@ -83,7 +83,7 @@ const Konto = () => {
 
   return (
     <div>
-      <h1>Username: {formData.username || "Kein Name"}</h1>
+      <h1>Username: {formData.username || ""}</h1>
       <Button onClick={() => toggleTheme()}>Switch Theme</Button>
       <Button variant="wow" onClick={() => toggleTheme()}>
         Switch Theme
